@@ -18,6 +18,10 @@ h1 {
   color: black;
 }
 
+h2 {
+  color: black;
+}
+
 button {
   height: 2.5rem;
   width: 6rem;
@@ -29,6 +33,7 @@ button {
   padding: 0px;
   border: 1px solid #ccc;
   margin-left: 50%;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
   align-self: center;
   text-align: center;
   width:100%;
@@ -64,6 +69,20 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: translateX(-50%);
 }
+.article {
+  background-color: #fff;
+  color: white;
+  height: fit-content;
+  padding: 0px;
+  border: 1px solid #ccc;
+  margin-left: 50%;
+  vertical-align: bottom;
+  text-align: center;
+  width:100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+}
+
 
 .footer {
   background-color: #fff;
@@ -103,6 +122,10 @@ button {
 
 .articleText {
   color: black;
+}
+
+.imageforarticle {
+  max-width: 70%
 }
 
 .articleImage {
