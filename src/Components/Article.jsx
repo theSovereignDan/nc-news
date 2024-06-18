@@ -1,28 +1,30 @@
 import { useParams } from "react-router-dom"
-import axios from "axios"
 import { useState, useEffect } from "react"
 import { Card } from "react-bootstrap"
+import { fetchArticle, fetchCommentsForArticle, patchArticleVotes } from "../api"
 
 function Article(){
     const { article_id} = useParams()
 
     const [article, setArticle] = useState("")
     const [comments, setComments] = useState("")
+    const [articleVotes, setArticleVotes] = useState("")
+    const [haveMadeVote, setHaveMadeVote] = useState(false)
 
     function onVote(event) {
         const comment_id = (event.target.value)[0]
         const votesl = (event.target.value)[1] + 1
         
-       
-
     }
 
     useEffect(() => {
-        axios.get(`https://myncnewsproject.onrender.com/api/articles/${article_id}`).then(({data})=> {
-            setArticle(data)
+        fetchArticle(article_id).then((articledata) => {
+            setArticle(articledata)
+            setArticleVotes(articledata.votes)
         })
-        axios.get(`https://myncnewsproject.onrender.com/api/articles/${article_id}/comments`).then(({data})=> {
-            const commentHTML = data.map((comment)=> {
+
+        fetchCommentsForArticle(article_id).then((data) => {  
+              const commentHTML = data.map((comment)=> {
                 return (<div key={comment.comment_id}>
                 <Card key={comment.comment_id}className="commentCard">
                     <Card.Body>
@@ -43,6 +45,26 @@ function Article(){
 
     }, [article_id])
 
+    function upVoteArticle() {
+         setArticleVotes(articleVotes + 1)
+        patchArticleVotes(article_id, 1).then(()=> {
+            setHaveMadeVote(true)
+        }).catch(async ()=> {
+             setArticleVotes(articleVotes)
+            alert("Network Error, try again")
+        })
+    }
+
+    function downVoteArticle() {
+        setArticleVotes(articleVotes - 1)
+        patchArticleVotes(article_id, -1).then(()=> {
+            setHaveMadeVote(true)
+        }).catch(()=> {
+            setArticleVotes(articleVotes)
+            alert("Network Error, try again")
+        })
+    }
+
     return <div className="article">
         <br></br>
         <br></br>
@@ -55,8 +77,12 @@ function Article(){
         <h2>{article.body}</h2>
         <br></br>
         <h2>Topic {article.topic}</h2>
-        <h2>Votes : {article.votes}</h2>
+        <h2>Votes : {articleVotes}</h2>
         <h2>Created At: {article.created_at}</h2>
+        {
+        haveMadeVote === true ? (<label className="voted">You have cast your vote</label>) : (<div>
+        <button onClick={upVoteArticle}>👍</button>
+        <button onClick={downVoteArticle}>👎</button></div>)}
         <br></br>
         <h2>Comments</h2>
        {comments} 

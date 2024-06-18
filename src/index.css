@@ -149,3 +149,9 @@ button {
   width: 10rem;
 
 }
+
+.voted {
+  margin-top: 3rem;
+  font-size: 2rem;
+  color: black;
+}

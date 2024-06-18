@@ -1,16 +1,15 @@
 import { useState } from "react"
-import axios from "axios"
 import { useEffect } from "react"
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import { fetchAllArticles } from "../api.jsx";
 
 function Articles() {
     
     const [articles, setArticles] = useState("")
 
     useEffect(() => {
-        axios.get("https://myncnewsproject.onrender.com/api/articles").then(({data})=> {
-
+        fetchAllArticles().then((data)=> {
         const articlesHtml = data.map((article)=> {
                 return (<Link to={`/articles/${article.article_id}`}><Card key={article.article_id} className="articleCard">
                         <Card.Body>
