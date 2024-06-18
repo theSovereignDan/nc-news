@@ -113,6 +113,15 @@ button {
   cursor: pointer;
  }
 
+ .commentCard {
+  width: 80%;
+  margin: 2rem;
+  border: 2px solid black; /* Set the width and style of the border */
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+ }
+
  .AllArticlesContainer {
   display: flex;
   flex-wrap: wrap;
@@ -123,6 +132,13 @@ button {
 .articleText {
   color: black;
 }
+
+.commentText {
+  font-size: 1.4em;
+  color: black;
+}
+
+
 
 .imageforarticle {
   max-width: 70%
