@@ -113,6 +113,14 @@ button {
   cursor: pointer;
  }
 
+ .topicCard {
+  width: fit-content;
+  margin: 3px;
+  border: 2px solid black; /* Set the width and style of the border */
+  border-radius: 1rem;
+  cursor: pointer;
+ }
+
  .commentCard {
   width: 80%;
   margin: 2rem;
@@ -134,6 +142,9 @@ button {
   color: black;
 }
 
+.topicText {
+  color: black
+}
 .commentText {
   font-size: 1.4em;
   color: black;
@@ -147,7 +158,14 @@ button {
 
 .articleImage {
   width: 10rem;
+}
 
+.topicImage {
+  width: 10rem;
+}
+
+h3 {
+  color:black;
 }
 
 .voted {
@@ -162,7 +180,7 @@ button {
 }
 
 .postCommentInputBox {
-  width: 60rem;
+  width: 50%;
 font-size: 1.75rem;
   height: 5rem;
 }
@@ -182,4 +200,18 @@ font-size: 1.75rem;
 }
 .bin {
   font-size: 2rem;
+}
+
+.topics {
+  background-color: #fff;
+  color: white;
+  height: fit-content;
+  padding: 0px;
+  border: 1px solid #ccc;
+  margin-left: 50%;
+  vertical-align: bottom;
+  text-align: center;
+  width:100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
 }

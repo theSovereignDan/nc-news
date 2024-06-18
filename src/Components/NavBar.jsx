@@ -13,7 +13,7 @@ function NavBar() {
 
     return (<div className = "navbar">
         <Link to="/"><button>All Articles</button></Link>
-        <button>Topics</button>
+        <Link to="/topics"> <button>Topics</button></Link>
         {user ? <button onClick={logOut}className="rightButton">Log Out</button> : <Link to="/signin"><button className="rightButton">Log In</button></Link>}
     </div>)
 }

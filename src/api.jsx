@@ -48,3 +48,16 @@ export function deleteComment(comment_id) {
         return data
     })
 }
+
+export function fetchAllTopics() {
+    return axios.get(`https://myncnewsproject.onrender.com/api/topics`).then((response)=> {
+        const topics = response.data
+        return topics
+    })
+}
+
+export function fetchAllArticlesWithQuery(topic_name) {
+    return axios.get(`https://myncnewsproject.onrender.com/api/articles?topic=${topic_name}`).then(({data})=> {
+        return data
+    })
+}

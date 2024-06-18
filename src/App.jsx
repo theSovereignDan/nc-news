@@ -6,7 +6,8 @@ import Articles from './Components/Articles'
 import Article from './Components/Article'
 import { UserProvider } from './Components/UserContext';
 import SignIn from './Components/SignIn'
-
+import Topics from './Components/Topics'
+import Topic from './Components/Topic'
 function App() {
 
 
@@ -18,6 +19,8 @@ function App() {
         <Route path="/" element={<Articles/>}/>
         <Route path="/articles/:article_id" element={<Article />}/>
         <Route path="/signin" element={<SignIn />}/>
+        <Route path="/topics" element={<Topics />}/>
+        <Route path="/topics/:topic_name" element={<Topic />}/>
     </Routes>
     <Footer/>
     </UserProvider>
