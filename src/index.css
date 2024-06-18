@@ -155,3 +155,28 @@ button {
   font-size: 2rem;
   color: black;
 }
+
+.postCommentTxt {
+  color: black;
+  font-size: 1.5rem;
+}
+
+.postCommentInputBox {
+  width: 60rem;
+font-size: 1.75rem;
+  height: 5rem;
+}
+
+.signin {
+  background-color: #fff;
+  color: white;
+  height: 25rem;
+  padding: 0px;
+  border: 1px solid #ccc;
+  margin-left: 50%;
+  vertical-align: bottom;
+  text-align: center;
+  width:100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+}

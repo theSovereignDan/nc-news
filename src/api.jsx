@@ -24,3 +24,20 @@ export function patchArticleVotes(article_id, inc_votes) {
         return Promise.reject()
     })
 }
+
+export function fetchAllUsers() {
+    return axios.get(`https://myncnewsproject.onrender.com/api/users`).then(({data})=> {
+        return data
+    })
+}
+
+
+
+export function postAComment(article_id, username, comment) {
+    
+    return axios.post(`https://myncnewsproject.onrender.com/api/articles/${article_id}/comments`, { username: username,
+        body: comment
+}).then(({data})=> {
+        return data
+    })
+}
