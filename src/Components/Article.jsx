@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { Card } from "react-bootstrap"
 import { UserContext } from "./UserContext"
 import { useContext } from "react"
-import { fetchArticle, fetchCommentsForArticle, patchArticleVotes, postAComment } from "../api"
+import { deleteComment, fetchArticle, fetchCommentsForArticle, patchArticleVotes, postAComment } from "../api"
 
 function Article(){
     const { article_id} = useParams()
@@ -13,7 +13,27 @@ function Article(){
     const [haveMadeVote, setHaveMadeVote] = useState(false)
     const [newComment, setNewComment] = useState("")
 
+    const [hasBeenDeleted, setHasBeenDeleted] = useState(false)
+
+
     const {user} = useContext(UserContext)
+
+
+    function onbinClick(event) {
+        event.preventDefault()
+
+        const comment_id = event.target.value
+
+        deleteComment(comment_id).then((data)=> {
+            setHasBeenDeleted(!hasBeenDeleted)
+            setTimeout(() => {
+                alert("Your comment has been deleted!")
+            }, 500)
+
+        }).catch(()=> {
+            alert("Network Error, try again")
+        })
+    }
 
 
     function onVote(event) {
@@ -41,14 +61,14 @@ function Article(){
            </Card.Text>
                     </Card.Body>
                 </Card>
-                <button value={[comment.comment_id, comment.votes]}onClick={onVote}>👍 {comment.votes}</button>
+                <button value={[comment.comment_id, comment.votes]}onClick={onVote}>👍 {comment.votes}</button>{user === comment.author ? <button value={comment.comment_id} onClick={onbinClick}className="binButton"><span className="bin">🗑️</span></button> : null}
                 </div>
             )
             })
             setComments(commentHTML)
         })
 
-    }, [article_id])
+    }, [article_id, hasBeenDeleted])
 
     function upVoteArticle() {
          setArticleVotes(articleVotes + 1)
@@ -77,28 +97,30 @@ function Article(){
     function submitComment(event) {
         event.preventDefault()
 
-        const localComment = (
-        <div key="local">
-        <Card  key="local" className="commentCard">
-        <Card.Body>
-   <Card.Text className="commentText">
-     {newComment}
-</Card.Text>
-<Card.Text className="commentText">
-     By {user}
-</Card.Text>
-        </Card.Body>
-    </Card>
-    <button onClick={onVote}>👍 {0}</button>
-    </div>
-    )
-
         if(user) {
-
-        setComments([localComment, ...comments])
-
         postAComment(article_id, user, newComment).then((data)=> {
-            console.log(data)
+        
+            const comment_id = data[0].comment_id
+            
+            const localComment = (
+                <div key={comment_id}>
+                <Card  key={comment_id} className="commentCard">
+                <Card.Body>
+           <Card.Text className="commentText">
+             {newComment}
+        </Card.Text>
+        <Card.Text className="commentText">
+             By {user}
+        </Card.Text>
+                </Card.Body>
+            </Card>
+            <button onClick={onVote}>👍 {0}</button>
+            <button value ={comment_id}onClick={onbinClick}className="binButton"><span className="bin">🗑️</span></button>
+            </div>
+            )
+
+            setComments([localComment, ...comments])
+
         })
         } else {
             alert("Please log in to make a comment")

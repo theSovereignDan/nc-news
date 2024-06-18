@@ -41,3 +41,10 @@ export function postAComment(article_id, username, comment) {
         return data
     })
 }
+
+export function deleteComment(comment_id) {
+    
+    return axios.delete(`https://myncnewsproject.onrender.com/api/comments/${comment_id}`).then(({data})=> {
+        return data
+    })
+}

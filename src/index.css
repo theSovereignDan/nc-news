@@ -180,3 +180,6 @@ font-size: 1.75rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: translateX(-50%);
 }
+.bin {
+  font-size: 2rem;
+}
