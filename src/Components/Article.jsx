@@ -9,19 +9,34 @@ function Article(){
     const [article, setArticle] = useState("")
     const [comments, setComments] = useState("")
 
+    function onVote(event) {
+        const comment_id = (event.target.value)[0]
+        const votesl = (event.target.value)[1] + 1
+        
+       
+
+    }
+
     useEffect(() => {
         axios.get(`https://myncnewsproject.onrender.com/api/articles/${article_id}`).then(({data})=> {
             setArticle(data)
         })
         axios.get(`https://myncnewsproject.onrender.com/api/articles/${article_id}/comments`).then(({data})=> {
             const commentHTML = data.map((comment)=> {
-                return (<Card className="commentCard">
+                return (<div key={comment.comment_id}>
+                <Card key={comment.comment_id}className="commentCard">
                     <Card.Body>
                <Card.Text className="commentText">
                  {comment.body}
            </Card.Text>
+           <Card.Text className="commentText">
+                 By {comment.author}
+           </Card.Text>
                     </Card.Body>
-                </Card>)
+                </Card>
+                <button value={[comment.comment_id, comment.votes]}onClick={onVote}>👍 {comment.votes}</button>
+                </div>
+            )
             })
             setComments(commentHTML)
         })

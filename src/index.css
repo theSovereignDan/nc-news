@@ -116,6 +116,7 @@ button {
  .commentCard {
   width: 80%;
   margin: 2rem;
+  margin-left: 10%;
   border: 2px solid black; /* Set the width and style of the border */
   border-radius: 1rem;
   margin-bottom: 2rem;
