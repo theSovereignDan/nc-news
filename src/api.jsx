@@ -55,13 +55,16 @@ export function fetchAllArticles(sort_by, order, topic) {
 
     let query = '';
 
-    let url = `https://myncnewsproject.onrender.com/api/articles?`
+    let url = `https://myncnewsproject.onrender.com/api/articles`
     if (topic) {
-        url += `topic=${topic}`
+        url += `?topic=${topic}`
     }
 
     if (sort_by !== "none") {
-        query += `&sort_by=${sort_by}`;
+        if (!topic) {
+            url += "?"
+        }
+        query += `sort_by=${sort_by}`;
     }
 
     if (order !== "none") {
@@ -71,6 +74,8 @@ export function fetchAllArticles(sort_by, order, topic) {
     }
 
      url += `${query ? query : ''}`;
+
+     console.log(url)
     
     return axios.get(url).then(({ data }) => {
         return data;

@@ -15,6 +15,7 @@ function Articles() {
         if (firstTime === false) {
        fetchAllArticles(sort_by, order).then((data)=> {
          const articlesarr = data.articles
+         console.log(articlesarr)
         const articlesHtml = articlesarr.map((article)=> {
                 return (<Link to={`/articles/${article.article_id}`}><Card key={article.article_id} className="articleCard">
                         <Card.Body>

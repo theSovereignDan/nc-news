@@ -24,7 +24,7 @@ function Topic() {
 
     useEffect(() => {
         if (firstTime === false) {
-       fetchAllArticles(sort_by, order).then((data)=> {
+       fetchAllArticles(sort_by, order, topic_name).then((data)=> {
          const articlesarr = data.articles
         const articlesHtml = articlesarr.map((article)=> {
                 return (<Link to={`/articles/${article.article_id}`}><Card key={article.article_id} className="articleCard">
@@ -45,7 +45,7 @@ function Topic() {
             setArticles(articlesHtml)
         })
     } else {
-        fetchAllArticles(sort_by, "none").then((data)=> {
+        fetchAllArticles(sort_by, "none", topic_name).then((data)=> {
             const articlesarr = data.articles
            const articlesHtml = articlesarr.map((article)=> {
                    return (<Link to={`/articles/${article.article_id}`}><Card key={article.article_id} className="articleCard">
