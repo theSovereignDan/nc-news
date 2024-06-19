@@ -1,9 +1,4 @@
 import axios from "axios";
-export function fetchAllArticles() {
-    return axios.get("https://myncnewsproject.onrender.com/api/articles").then(({data})=> {
-        return data
-    })
-}
 
 export function fetchArticle(article_id) {
     return axios.get(`https://myncnewsproject.onrender.com/api/articles/${article_id}`).then(({data})=> {
@@ -56,8 +51,29 @@ export function fetchAllTopics() {
     })
 }
 
-export function fetchAllArticlesWithQuery(topic_name) {
-    return axios.get(`https://myncnewsproject.onrender.com/api/articles?topic=${topic_name}`).then(({data})=> {
-        return data
-    })
+export function fetchAllArticles(sort_by, order, topic) {
+
+    let query = '';
+
+    let url = `https://myncnewsproject.onrender.com/api/articles?`
+    if (topic) {
+        url += `topic=${topic}`
+    }
+
+    if (sort_by !== "none") {
+        query += `&sort_by=${sort_by}`;
+    }
+
+    if (order !== "none") {
+        const changedOrder = order === "⬆️" ? "ASC" : "DESC" 
+        if (query) query += '&';
+        query += `order=${changedOrder}`;
+    }
+
+     url += `${query ? query : ''}`;
+    
+    return axios.get(url).then(({ data }) => {
+        return data;
+    });
 }
+
