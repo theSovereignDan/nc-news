@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { Card } from "react-bootstrap"
 import { UserContext } from "./UserContext"
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 import { deleteComment, fetchArticle, fetchCommentsForArticle, patchArticleVotes, postAComment } from "../api"
 
 function Article(){
@@ -12,9 +13,8 @@ function Article(){
     const [articleVotes, setArticleVotes] = useState("")
     const [haveMadeVote, setHaveMadeVote] = useState(false)
     const [newComment, setNewComment] = useState("")
-
     const [hasBeenDeleted, setHasBeenDeleted] = useState(false)
-
+    const [invalidArticle, setInvalidArticle] = useState("none")
 
     const {user} = useContext(UserContext)
 
@@ -46,6 +46,8 @@ function Article(){
         fetchArticle(article_id).then((articledata) => {
             setArticle(articledata)
             setArticleVotes(articledata.votes)
+        }).catch(()=> {
+            setInvalidArticle(true)
         })
 
         fetchCommentsForArticle(article_id).then((data) => {  
@@ -129,6 +131,26 @@ function Article(){
         setNewComment("")
     }
 
+    if (invalidArticle !== "none") {
+
+        return <div key="invalidarticle" className="articles">
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
+       <h1>No such Article...</h1>
+        <div className="invalidArticleContainer">
+             <Link to="/"><button className="articleButton">Click to see articles to choose from</button></Link>
+        </div>
+        <br></br>
+        <br></br>
+        </div>
+
+    } else {
+
     return <div className="article">
         <br></br>
         <br></br>
@@ -159,6 +181,7 @@ function Article(){
         <br></br>
        {comments} 
     </div>
+    }
 }
 
 export default Article

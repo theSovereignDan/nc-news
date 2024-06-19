@@ -226,3 +226,29 @@ font-size: 1.75rem;
   height: 40px;  /* Adjust the height as needed */
 
 }
+
+.invalidTopicContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1%;
+  height: 20rem;
+}
+
+
+.invalidArticleContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1%;
+  height: 20rem;
+}
+.topicButton {
+  margin-top: 6rem;
+  width: 10rem;
+}
+
+.articleButton {
+  margin-top: 6rem;
+  width: 10rem;
+}

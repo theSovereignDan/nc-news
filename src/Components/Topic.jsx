@@ -5,11 +5,13 @@ import { Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 function Topic() {
     const { topic_name } = useParams()
+
     const capitalised_topic_name = topic_name[0].toUpperCase() + topic_name.slice(1)
 
     const [order, setOrder] = useState("⬆️")
     const [firstTime, setFirstTime] = useState(true)
     const [sort_by, setSort_by] = useState("none")
+    const [invalidTopic, setInvalidTopic] = useState("none")
 
     let topic_name_with_emoji
     if(topic_name === "football") {
@@ -49,6 +51,8 @@ function Topic() {
                   </Card></Link>)
             })
             setArticles(articlesHtml)
+        }).catch(()=> {
+            setInvalidTopic(true)
         })
     } else {
         fetchAllArticles(sort_by, "none", topic_name).then((data)=> {
@@ -76,7 +80,9 @@ function Topic() {
                      </Card></Link>)
                })
                setArticles(articlesHtml)
-           })
+           }).catch(()=> {
+            setInvalidTopic(true)
+        })
     }
     }, [sort_by, order])
 
@@ -102,6 +108,24 @@ function Topic() {
         }
     }
     
+    if(invalidTopic !== "none") {
+        return <div key={topic_name_with_emoji} className="topics">
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
+       <h1>No such Topic...</h1>
+        <div className="invalidTopicContainer">
+             <Link to="/topics"><button className="topicButton">Click to see Topics to choose from</button></Link>
+        </div>
+        <br></br>
+        <br></br>
+     
+     </div>
+    } else {
 
    return <div key={topic_name_with_emoji} className="topics">
    <br></br>
@@ -120,6 +144,7 @@ function Topic() {
    <br></br>
 
 </div>
+    }
 }
 
 export default Topic
