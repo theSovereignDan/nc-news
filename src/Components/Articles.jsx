@@ -18,20 +18,26 @@ function Articles() {
          console.log(articlesarr)
         const articlesHtml = articlesarr.map((article)=> {
                 return (<Link to={`/articles/${article.article_id}`}><Card key={article.article_id} className="articleCard">
-                        <Card.Body>
-                      <Card.Title className="articleText">
-                        {article.title}
-                      </Card.Title>
-                      <Card.Img className="articleImage"
-                variant="top"
-                src={article.article_img_url}
-              />
-                 <Card.Text className="articleText">
-                By {article.author}
-             </Card.Text>
-                      </Card.Body>
-                  </Card></Link>)
-            })
+                  <Card.Body>
+                <Card.Title className="articleText">
+                  {article.title}
+                </Card.Title>
+                <Card.Img className="articleImage"
+          variant="top"
+          src={article.article_img_url}
+        />
+           <Card.Text className="articleText">
+          By {article.author}
+       </Card.Text>
+       <Card.Text className="articleText">
+          Date: {article.created_at}
+       </Card.Text>
+       <Card.Text className="articleText">
+       Votes: {article.votes}
+       </Card.Text>
+                </Card.Body>
+            </Card></Link>)
+      })
             setArticles(articlesHtml)
         })
     } else {
@@ -49,6 +55,12 @@ function Articles() {
                  />
                     <Card.Text className="articleText">
                    By {article.author}
+                </Card.Text>
+                <Card.Text className="articleText">
+                   Date: {article.created_at}
+                </Card.Text>
+                <Card.Text className="articleText">
+                Votes: {article.votes}
                 </Card.Text>
                          </Card.Body>
                      </Card></Link>)

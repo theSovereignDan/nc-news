@@ -64,6 +64,10 @@ export function fetchAllArticles(sort_by, order, topic) {
         if (!topic) {
             url += "?"
         }
+
+        if (topic) {
+            url += "&"
+        }
         query += `sort_by=${sort_by}`;
     }
 
@@ -74,8 +78,6 @@ export function fetchAllArticles(sort_by, order, topic) {
     }
 
      url += `${query ? query : ''}`;
-
-     console.log(url)
     
     return axios.get(url).then(({ data }) => {
         return data;

@@ -8,7 +8,7 @@ function Topic() {
     const capitalised_topic_name = topic_name[0].toUpperCase() + topic_name.slice(1)
 
     const [order, setOrder] = useState("⬆️")
-    const [firstTime, setFirstTime] = useState("none")
+    const [firstTime, setFirstTime] = useState(true)
     const [sort_by, setSort_by] = useState("none")
 
     let topic_name_with_emoji
@@ -39,6 +39,12 @@ function Topic() {
                  <Card.Text className="articleText">
                 By {article.author}
              </Card.Text>
+             <Card.Text className="articleText">
+          Date: {article.created_at}
+       </Card.Text>
+       <Card.Text className="articleText">
+       Votes: {article.votes}
+       </Card.Text>
                       </Card.Body>
                   </Card></Link>)
             })
@@ -60,6 +66,12 @@ function Topic() {
                     <Card.Text className="articleText">
                    By {article.author}
                 </Card.Text>
+                <Card.Text className="articleText">
+          Date: {article.created_at}
+       </Card.Text>
+       <Card.Text className="articleText">
+       Votes: {article.votes}
+       </Card.Text>
                          </Card.Body>
                      </Card></Link>)
                })
