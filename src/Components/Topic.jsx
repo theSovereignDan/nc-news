@@ -1,21 +1,31 @@
-import { useState } from "react"
-import { useEffect } from "react"
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
-import { fetchAllArticles } from "../api.jsx";
+import { useParams } from "react-router-dom"
+import { fetchAllArticles } from "../api"
+import { useState, useEffect } from "react"
+import { Card } from "react-bootstrap"
+import { Link } from "react-router-dom"
+function Topic() {
+    const { topic_name } = useParams()
+    const capitalised_topic_name = topic_name[0].toUpperCase() + topic_name.slice(1)
 
-function Articles() {
-    
-    const [articles, setArticles] = useState("")
     const [order, setOrder] = useState("⬆️")
     const [firstTime, setFirstTime] = useState("none")
     const [sort_by, setSort_by] = useState("none")
 
+    let topic_name_with_emoji
+    if(topic_name === "football") {
+        topic_name_with_emoji = capitalised_topic_name + " ⚽"
+    } else if (topic_name === "cooking") {
+        topic_name_with_emoji = capitalised_topic_name + " 🍰"
+    } else if (topic_name === "coding") {
+        topic_name_with_emoji = capitalised_topic_name + " 🖥️"
+    }
+
+    const [articles, setArticles] = useState("")
+
     useEffect(() => {
         if (firstTime === false) {
-       fetchAllArticles(sort_by, order).then((data)=> {
+       fetchAllArticles(sort_by, order, topic_name).then((data)=> {
          const articlesarr = data.articles
-         console.log(articlesarr)
         const articlesHtml = articlesarr.map((article)=> {
                 return (<Link to={`/articles/${article.article_id}`}><Card key={article.article_id} className="articleCard">
                         <Card.Body>
@@ -35,7 +45,7 @@ function Articles() {
             setArticles(articlesHtml)
         })
     } else {
-        fetchAllArticles(sort_by, "none").then((data)=> {
+        fetchAllArticles(sort_by, "none", topic_name).then((data)=> {
             const articlesarr = data.articles
            const articlesHtml = articlesarr.map((article)=> {
                    return (<Link to={`/articles/${article.article_id}`}><Card key={article.article_id} className="articleCard">
@@ -80,9 +90,11 @@ function Articles() {
         }
     }
     
-    
-    return (<div className="articles">
-    <select className="sortby" onChange={handleSortByChange} name="category" id="">
+
+   return <div key={topic_name_with_emoji} className="topics">
+   <br></br>
+   <h1>{topic_name_with_emoji}</h1>
+   <select className="sortby" onChange={handleSortByChange} name="category" id="">
   <option>--Sort By--</option>
   <option key= {"Date"} value={"created_at"}>Date</option>
   <option key= {"Comment Count"} value={"comment_count"}>Comment count</option>
@@ -90,10 +102,12 @@ function Articles() {
   </select>
 
   <button value={order}onClick={handleOrderClick}><span className="arrow">{order}</span></button>
+<br></br>
+   <div className="AllArticlesContainer">{articles}</div>
+   <br></br>
+   <br></br>
 
-
-        <div className="AllArticlesContainer">{articles}</div>
-    </div>)
+</div>
 }
 
-export default Articles
+export default Topic
