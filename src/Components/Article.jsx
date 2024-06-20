@@ -73,6 +73,7 @@ function Article(){
     }, [article_id, hasBeenDeleted])
 
     function upVoteArticle() {
+        if(user) {
          setArticleVotes(articleVotes + 1)
         patchArticleVotes(article_id, 1).then(()=> {
             setHaveMadeVote(true)
@@ -80,9 +81,13 @@ function Article(){
              setArticleVotes(articleVotes)
             alert("Network Error, try again")
         })
+    } else {
+        alert("Please log in to upvote the article")
+    }
     }
 
     function downVoteArticle() {
+        if (user) {
         setArticleVotes(articleVotes - 1)
         patchArticleVotes(article_id, -1).then(()=> {
             setHaveMadeVote(true)
@@ -90,6 +95,9 @@ function Article(){
             setArticleVotes(articleVotes)
             alert("Network Error, try again")
         })
+        } else {
+        alert("Please log in to downvote the article")
+        }
     }
 
     function newCommentInputChange(event) {
