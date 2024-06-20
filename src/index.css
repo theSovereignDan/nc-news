@@ -6,6 +6,7 @@
 }
 
 body {
+  min-width: 600px;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   margin: 0;
@@ -15,6 +16,10 @@ body {
 }
 
 h1 {
+  color: black;
+}
+
+h2 {
   color: black;
 }
 
@@ -29,6 +34,7 @@ button {
   padding: 0px;
   border: 1px solid #ccc;
   margin-left: 50%;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
   align-self: center;
   text-align: center;
   width:100%;
@@ -64,6 +70,20 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: translateX(-50%);
 }
+.article {
+  background-color: #fff;
+  color: white;
+  height: fit-content;
+  padding: 0px;
+  border: 1px solid #ccc;
+  margin-left: 50%;
+  vertical-align: bottom;
+  text-align: center;
+  width:100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+}
+
 
 .footer {
   background-color: #fff;
@@ -94,6 +114,24 @@ button {
   cursor: pointer;
  }
 
+ .topicCard {
+  width: fit-content;
+  margin: 3px;
+  border: 2px solid black; /* Set the width and style of the border */
+  border-radius: 1rem;
+  cursor: pointer;
+ }
+
+ .commentCard {
+  width: 80%;
+  margin: 2rem;
+  margin-left: 10%;
+  border: 2px solid black; /* Set the width and style of the border */
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+ }
+
  .AllArticlesContainer {
   display: flex;
   flex-wrap: wrap;
@@ -105,7 +143,113 @@ button {
   color: black;
 }
 
+.topicText {
+  color: black
+}
+.commentText {
+  font-size: 1.4em;
+  color: black;
+}
+
+
+
+.imageforarticle {
+  max-width: 70%
+}
+
 .articleImage {
   width: 10rem;
+}
 
+.topicImage {
+  width: 10rem;
+}
+
+h3 {
+  color:black;
+}
+
+.voted {
+  margin-top: 3rem;
+  font-size: 2rem;
+  color: black;
+}
+
+.postCommentTxt {
+  color: black;
+  font-size: 1.5rem;
+}
+
+.postCommentInputBox {
+  width: 50%;
+font-size: 1.75rem;
+  height: 5rem;
+}
+
+.signin {
+  background-color: #fff;
+  color: white;
+  height: 25rem;
+  padding: 0px;
+  border: 1px solid #ccc;
+  margin-left: 50%;
+  vertical-align: bottom;
+  text-align: center;
+  width:100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+}
+.bin {
+  font-size: 2rem;
+}
+
+.topics {
+  background-color: #fff;
+  color: white;
+  height: fit-content;
+  padding: 0px;
+  border: 1px solid #ccc;
+  margin-left: 50%;
+  vertical-align: bottom;
+  text-align: center;
+  width:100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+}
+
+.arrow {
+  font-size: 2rem;
+}
+
+.sortby {
+  font-size: 30px; /* Adjust the font size as needed */
+  width: 200px;  /* Adjust the width as needed */
+  height: 40px;  /* Adjust the height as needed */
+
+}
+
+.invalidTopicContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1%;
+  height: 20rem;
+}
+
+
+.invalidArticleContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1%;
+  height: 20rem;
+}
+.topicButton {
+  margin-top: 6rem;
+  width: 10rem;
+}
+
+.articleButton {
+  margin-top: 6rem;
+  width: 10rem;
 }
