@@ -2,6 +2,8 @@ import { useState } from "react"
 import axios from "axios"
 import { useEffect } from "react"
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
+
 function Articles() {
     
     const [articles, setArticles] = useState("")
@@ -10,7 +12,7 @@ function Articles() {
         axios.get("https://myncnewsproject.onrender.com/api/articles").then(({data})=> {
 
         const articlesHtml = data.map((article)=> {
-                return (<Card key={article.article_id} className="articleCard">
+                return (<Link to={`/articles/${article.article_id}`}><Card key={article.article_id} className="articleCard">
                         <Card.Body>
                       <Card.Title className="articleText">
                         {article.title}
@@ -23,7 +25,7 @@ function Articles() {
                 By {article.author}
              </Card.Text>
                       </Card.Body>
-                  </Card>)
+                  </Card></Link>)
             })
             setArticles(articlesHtml)
         })
